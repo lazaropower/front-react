@@ -6,11 +6,11 @@ import SignUp from "./components/SignUp";
 const App = () => (
   <>
     <Routes>
-      <Route path="/" element={'Hello World'} />
+      <Route path="/" element={"Hello World"} />
       <Route path="/home" element={<Home />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgot-password" element={'Forgot password'} />
+      <Route path="/forgot-password" element={"Forgot password"} />
     </Routes>
   </>
 );
