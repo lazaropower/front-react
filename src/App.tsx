@@ -1,14 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 const App = () => (
-  <BrowserRouter>
+  <>
     <Routes>
-      <Route path="/" element={'Home'} />
-      <Route path="/signin" element={'Sign in'} />
-      <Route path="/signup" element={'Sign up'} />
+      <Route path="/" element={'Hello World'} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/forgot-password" element={'Forgot password'} />
     </Routes>
-  </BrowserRouter>
-)
+  </>
+);
 
 export default App;
