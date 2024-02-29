@@ -1,9 +1,12 @@
-import GoogleButton from "./GoogleButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import authService, { ILoginRequest } from "../services/authService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "./ui/Loading";
+import InfoIcon from "./ui/icons/InfoIcon";
+import GoogleButton from "./ui/buttons/GoogleButton";
+import EyeIcon from "./ui/icons/EyeIcon";
+import EyeSlashIcon from "./ui/icons/EyeSlashIcon";
 
 interface ILoginInput {
   email: string;
@@ -19,6 +22,7 @@ const LoginForm = () => {
     authService.getRememberMe(),
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
     if (rememberMe) {
@@ -40,21 +44,24 @@ const LoginForm = () => {
     if (result) {
       navigate("/home");
     }
-    setErrorMessage("🛈 Invalid credentials, please try again");
+    setErrorMessage("Invalid credentials, please try again");
     setLoading(false);
   };
 
   const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("handleRememberMeChange");
     const value = e.target.checked;
-    console.log(value);
     setRememberMe(value);
     authService.setRememberMe(value);
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
     <div className="bg-white px-20 py-20 rounded-3xl border-2 border-gray-200">
-      <h1 className="text-5xl font-semibold">Cryptocabras</h1>
+      <h1 className="text-5xl font-semibold">Sign in</h1>
       <p className="font-medium text-lg text-gray-500 mt-4">
         Welcome back! Please enter your details.
       </p>
@@ -71,22 +78,32 @@ const LoginForm = () => {
             }}
           />
         </div>
-        <div>
+        <div className="relative">
           <label className="text-lg font-medium">Password</label>
           <input
             className={`w-full border-2 rounded-xl p-4 mt-1 bg-transparent ${errorMessage ? "border-red-500" : "border-gray-100"}`}
             placeholder="Enter your password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password", { required: true })}
             onFocus={() => {
               setErrorMessage("");
             }}
           />
+          <button
+            type="button"
+            className="absolute mt-5 right-5 text-gray-500 hover:text-gray-700"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
+          </button>
         </div>
 
         {errorMessage && (
-          <div className="mt-2 font-medium text-base text-red-500">
-            {errorMessage}
+          <div className="flex mt-2 font-medium text-base text-red-500">
+            <div className="mr-1">
+              <InfoIcon />
+            </div>
+            <div>{errorMessage}</div>
           </div>
         )}
 
@@ -124,14 +141,12 @@ const LoginForm = () => {
         </div>
         <div className="mt-8 flex justify-center items-center">
           <p className="font-medium text-base">Don't have an account?</p>
-          <button
+          <Link
+            to="../signup"
             className="text-violet-500 text-base font-medium ml-2"
-            onClick={() => {
-              navigate("/signup");
-            }}
           >
             Sign up
-          </button>
+          </Link>
         </div>
       </form>
     </div>
