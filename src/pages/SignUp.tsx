@@ -1,10 +1,10 @@
-import LoginForm from "../components/LoginForm";
+import RegistrationForm from "../components/RegistrationForm";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div className="flex w-full h-screen">
       <div className="flex items-center justify-center w-full lg:w-1/2">
-        <LoginForm />
+        <RegistrationForm />
       </div>
       <div className="hidden relative lg:flex h-full w-1/2 items-center justify-center bg-gray-200">
         <div className="w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-spin"></div>
@@ -14,4 +14,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
