@@ -1,12 +1,12 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import authService, { ILoginRequest } from "../services/authService";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Loading from "./ui/Loading";
-import InfoIcon from "./ui/icons/InfoIcon";
-import GoogleButton from "./ui/buttons/GoogleButton";
-import EyeIcon from "./ui/icons/EyeIcon";
-import EyeSlashIcon from "./ui/icons/EyeSlashIcon";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import authService, { ILoginRequest } from '../services/authService';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Loading from './ui/Loading';
+import InfoIcon from './ui/icons/InfoIcon';
+import GoogleButton from './ui/buttons/GoogleButton';
+import EyeIcon from './ui/icons/EyeIcon';
+import EyeSlashIcon from './ui/icons/EyeSlashIcon';
 
 interface ILoginInput {
   email: string;
@@ -17,7 +17,7 @@ interface ILoginInput {
 const LoginForm = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, setValue } = useForm<ILoginInput>();
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(
     authService.getRememberMe(),
   );
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (rememberMe) {
-      setValue("email", authService.getEmail());
+      setValue('email', authService.getEmail());
     }
   }, [rememberMe]);
 
@@ -42,14 +42,14 @@ const LoginForm = () => {
     const loginData = mapToLoginRequest(data);
     const result = await authService.login(loginData);
     if (result) {
-      navigate("/home");
+      navigate('/home');
     }
-    setErrorMessage("Invalid credentials, please try again");
+    setErrorMessage('Invalid credentials, please try again');
     setLoading(false);
   };
 
   const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("handleRememberMeChange");
+    console.log('handleRememberMeChange');
     const value = e.target.checked;
     setRememberMe(value);
     authService.setRememberMe(value);
@@ -69,24 +69,24 @@ const LoginForm = () => {
         <div>
           <label className="text-lg font-medium">Email</label>
           <input
-            className={`w-full border-2 rounded-xl p-4 mt-1 bg-transparent ${errorMessage ? "border-red-500" : "border-gray-100"}`}
+            className={`w-full border-2 rounded-xl p-4 mt-1 bg-transparent ${errorMessage ? 'border-red-500' : 'border-gray-100'}`}
             placeholder="Enter your email"
             type="email"
-            {...register("email", { required: true })}
+            {...register('email', { required: true })}
             onFocus={() => {
-              setErrorMessage("");
+              setErrorMessage('');
             }}
           />
         </div>
         <div className="relative">
           <label className="text-lg font-medium">Password</label>
           <input
-            className={`w-full border-2 rounded-xl p-4 mt-1 bg-transparent ${errorMessage ? "border-red-500" : "border-gray-100"}`}
+            className={`w-full border-2 rounded-xl p-4 mt-1 bg-transparent ${errorMessage ? 'border-red-500' : 'border-gray-100'}`}
             placeholder="Enter your password"
-            type={showPassword ? "text" : "password"}
-            {...register("password", { required: true })}
+            type={showPassword ? 'text' : 'password'}
+            {...register('password', { required: true })}
             onFocus={() => {
-              setErrorMessage("");
+              setErrorMessage('');
             }}
           />
           <button
@@ -112,7 +112,7 @@ const LoginForm = () => {
             <input
               type="checkbox"
               id="remember"
-              {...register("remember")}
+              {...register('remember')}
               checked={rememberMe}
               onChange={handleRememberMeChange}
             />
@@ -124,7 +124,7 @@ const LoginForm = () => {
             type="button"
             className="font-medium text-base text-violet-500"
             onClick={() => {
-              navigate("/forgot-password");
+              navigate('/forgot-password');
             }}
           >
             Forgot password
@@ -135,7 +135,7 @@ const LoginForm = () => {
             className="active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all py-3 rounded-xl bg-violet-500 text-white text-lg font-bold"
             type="submit"
           >
-            {loading ? <Loading /> : "Sign in"}
+            {loading ? <Loading /> : 'Sign in'}
           </button>
           <GoogleButton />
         </div>

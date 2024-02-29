@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Loading from "./ui/Loading";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Loading from './ui/Loading';
+import { Link } from 'react-router-dom';
 
 interface IRegisterInput {
   name: string;
@@ -18,7 +18,7 @@ const RegistrationForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<IRegisterInput> = async (data) => {
-    console.log("data");
+    console.log('data');
   };
 
   return (
@@ -35,7 +35,7 @@ const RegistrationForm = () => {
               className="w-full border-2 rounded-xl p-4 mt-1 bg-transparent border-gray-100"
               placeholder="Enter your name"
               type="text"
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
             />
           </div>
           <div className="flex-1">
@@ -44,7 +44,7 @@ const RegistrationForm = () => {
               className="w-full border-2 rounded-xl p-4 mt-1 bg-transparent border-gray-100"
               placeholder="Enter your name"
               type="text"
-              {...register("surname", { required: true })}
+              {...register('surname', { required: true })}
             />
           </div>
         </div>
@@ -54,7 +54,7 @@ const RegistrationForm = () => {
             className="w-full border-2 rounded-xl p-4 mt-1 bg-transparent border-gray-100"
             placeholder="Enter your email"
             type="email"
-            {...register("email", { required: true })}
+            {...register('email', { required: true })}
           />
         </div>
         <div>
@@ -63,8 +63,9 @@ const RegistrationForm = () => {
             className="w-full border-2 rounded-xl p-4 mt-1 bg-transparent border-gray-100"
             placeholder="Enter your password"
             type="password"
-            {...register("password", { required: true })}
+            {...register('password', { required: true })}
           />
+          <div></div>
         </div>
         <div>
           <label className="text-lg font-medium">Confirm password</label>
@@ -72,11 +73,11 @@ const RegistrationForm = () => {
             className="w-full border-2 rounded-xl p-4 mt-1 bg-transparent border-gray-100"
             placeholder="Confirm your password"
             type="password"
-            {...register("confirmPassword", { required: true })}
+            {...register('confirmPassword', { required: true })}
           />
         </div>
         <div className="mt-4">
-          <input type="checkbox" {...register("terms")} />
+          <input type="checkbox" {...register('terms')} />
           <label className="ml-2 font-medium text-base">
             <Link to="../terms-and-conditions">
               I agree with the terms and conditions.
@@ -88,7 +89,7 @@ const RegistrationForm = () => {
             className="active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all py-3 rounded-xl bg-violet-500 text-white text-lg font-bold"
             type="submit"
           >
-            {loading ? <Loading /> : "Sign up"}
+            {loading ? <Loading /> : 'Sign up'}
           </button>
         </div>
         <div className="mt-8 flex justify-center items-center">
